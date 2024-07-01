@@ -3,6 +3,7 @@
 This project was my first ever as a computer science student. While it might seem like a simple stupid and perhaps cringeworthy idea , I just wanted to explore HTML, CSS, and JavaScript. The project is an interactive envelope that reveals a random animated gif and message when clicked.
 
 ## Project Overview
+![image](https://github.com/GayathriPCh/envelope/assets/132088009/f5e7ae3a-8bed-4d38-8b11-3f1b72fc31aa)
 
 The Interactive Envelope is a playful web application where users click on an envelope to reveal a surprise message and gif. This project helped me understand the basics of web development, including styling with CSS and adding interactivity with JavaScript.
 
