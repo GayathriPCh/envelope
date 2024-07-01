@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Envelope</title>
+    <style>
+       body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://c.tenor.com/S4MdyoCR3scAAAAC/tenor.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+        .center {
+            display: flex;
+        }
+
+        #envelope {
+            position: absolute;
+            top: calc(50vh - 200px);
+            left: calc(50vw - 150px);
+            width: 300px;
+            height: 300px;
+        }
+
+        #envelope > * {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        #back {
+            display: block;
+            z-index: 0;
+        }
+
+        #front {
+            display: block;
+            z-index: 10;
+        }
+
+        #top {
+            display: block;
+            z-index: 11;
+        }
+
+        #top.animate,
+        #front.animate,
+        #back.animate,
+        #envelope button.animate {
+            opacity: 0;
+            transition: opacity 1s;
+            transition-delay: 1s;
+        }
+
+        #letter {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            z-index: 5;
+            left: 15px;
+            right: 15px;
+            bottom: 5px;
+            top: 105px;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            font-size: 16px;
+        }
+
+        #letter img {
+            height: 50%;
+            display: block;
+            margin: auto;
+        }
+
+        #letter h1 {
+            font-size: inherit;
+            margin: 10px 0;
+        }
+
+        #letter h2 {
+            font-size: inherit;
+            margin: 10px 0;
+        }
+
+        #letter.animate {
+            animation: makebig 2s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes makebig {
+            0% {
+                top: 105px;
+                left: 15px;
+                right: 15px;
+                bottom: 5px;
+                font-size: 16px;
+            }
+            33% {
+                top: -100px;
+                left: 15px;
+                right: 15px;
+                bottom: 150px;
+                font-size: 16px;
+            }
+            100% {
+                top: -100px;
+                left: -25px;
+                right: -25px;
+                bottom: -100px;
+                font-size: 24px;
+            }
+        }
+
+        #envelope button {
+            display: block;
+            z-index: 15;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(180deg, #2af598 0%, #009efd 100%);;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            top: calc(200px - 25px);
+            left: calc(150px - 25px);
+            transition: transform 1s, background-color 1s, color 1s;
+        }
+
+        #envelope button:hover {
+            background-color: pink;
+            transform: scale(1.5);
+            color: black;
+            transition: transform 1s, background-color 1s, color 1s;
+        }
+    </style>
+    <script>
+        const messages = [
+            { gif: 'pupp.webp', message: 'You make my heart skip a beat! ❤️' },
+            { gif: 'wink.webp', message: 'You drive me crazy, hope your license gets suspended. 🚗' },
+            { gif: 'ghost.webp', message: 'I follow my dreams and I\'ll follow you anywhere. 🌟' },
+            { gif: 'crochet.webp', message: 'Do you like Star Wars? Because Yoda only one for me! 🌌' },
+            { gif: 'dance.webp', message: 'If I could rearrange the alphabet, I would put U and I together. 🌈' },
+            // Add more messages and corresponding gifs as needed
+        ];
+
+        function openUp() {
+            const $opentop = document.querySelector('#opentop');
+            const $top = document.querySelector('#top');
+            const $front = document.querySelector('#front');
+            const $back = document.querySelector('#back');
+            const $letter = document.querySelector('#letter');
+            const $button = document.querySelector('button');
+
+            // Get a random message and gif
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const { gif, message } = messages[randomIndex];
+
+            // Set the new gif and message
+            const $img = $letter.querySelector('img');
+            $img.src = gif;
+
+            const $message = $letter.querySelector('#message');
+            $message.textContent = message;
+
+            $opentop.beginElement();
+            $top.style.zIndex = 2;
+
+            $top.classList.add('animate');
+            $front.classList.add('animate');
+            $back.classList.add('animate');
+            $button.classList.add('animate');
+            $letter.classList.add('animate');
+        }
+    </script>
+</head>
+<body>
+
+    <div id='envelope'>
+        <div id='back'>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                height="300" width="300">
+                <polygon
+                    points="0,100 300,100 300,300 0,300"
+                    style="fill:#a557f2;stroke:none;stroke-width:0" />
+            </svg>
+        </div>
+        <div id='front'>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                height="300" width="300">
+                <polygon
+                    points="0,100 150,200 300,100 300,300 0,300"
+                    style="fill:#a557f2; stroke:#6713d2; stroke-width:3" />
+            </svg>
+        </div>
+        <div id='top'>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                height="300" width="300">
+                <polygon
+                    points="0,100 150,200 300,100"
+                    style="fill:#a557f2;stroke:#6713d2;stroke-width:2">
+                    <animate id='opentop' attributeName="points" dur="0.5s" fill="freeze"
+                        begin="indefinite"
+                        from="0,100 150,200 300,100"
+                        to="0,100 150,0 300,100" />
+                </polygon>
+            </svg>
+        </div>
+        <div id='letter'>
+            <h1 id="message">You make my heart skip a beat! ❤️</h1>
+            <img src='pupp.webp' alt='Animated Gif'>
+            <h2>From: Yours Truly</h2>
+        </div>
+        <button onclick='openUp()'>
+            Click Here
+        </button>
+    </div>
+<button onclick="window.location.reload()"
+        style="padding: 10px 20px;
+               background:linear-gradient(180deg, #2af598 0%, #009efd 100%);;
+               border: none;
+               color: white;
+               font-size: 16px;
+               border-radius: 20px;
+               cursor: pointer;
+               margin-top: 100px;
+               margin-left: 300px;">
+    Do it again
+</button>
+
+</body>
+</html>
